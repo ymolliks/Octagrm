@@ -16,11 +16,11 @@ public class CommentRepository(ApplicationDbContext context)
     /// An enumerable collection of comments belonging to the specified post, including the associated user.
     /// </returns>
     public async Task<IEnumerable<Comment>> GetCommentsByPostIdAsync(int postId)
-    {
-        return await Context.Comments
-            .Where(c => c.PostId == postId)
-            .Include(c => c.User)
-            .OrderBy(c => c.CreatedAt)
-            .ToListAsync();
-    }
+{
+    return await Context.Comments
+        .Where(c => c.PostId == postId)
+        .Include(c => c.User)
+        .OrderBy(c => c.CreatedAt)
+        .ToListAsync();
+}
 }

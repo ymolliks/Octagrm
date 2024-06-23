@@ -21,5 +21,5 @@ public class Post
     // Navigation Properties
     public List<Like> Likes { get; set; }
     public List<Comment> Comments { get; set; }
-    public List<PostHashtag> PostHashtags { get; set; } 
+    public List<PostHashtag> PostHashtags { get; set; }
 }

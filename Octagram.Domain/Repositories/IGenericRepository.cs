@@ -12,7 +12,7 @@ public interface IGenericRepository<T> where T : class
     /// The entity with the specified ID, or null if no such entity exists.
     /// </returns>
     Task<T?> GetByIdAsync(int id);
-    
+
     /// <summary>
     /// Retrieves all entities of the specified type.
     /// </summary>
@@ -20,7 +20,7 @@ public interface IGenericRepository<T> where T : class
     /// An IQueryable collection of all entities of the specified type.
     /// </returns>
     IQueryable<T> GetAllAsync();
-    
+
     /// <summary>
     /// Retrieves entities that match the specified predicate.
     /// </summary>
@@ -29,7 +29,7 @@ public interface IGenericRepository<T> where T : class
     /// An IQueryable collection of entities that satisfy the predicate.
     /// </returns>
     IQueryable<T> FindAsync(Expression<Func<T, bool>> predicate);
-    
+
     /// <summary>
     /// Adds a new entity to the repository.
     /// </summary>
@@ -38,7 +38,7 @@ public interface IGenericRepository<T> where T : class
     /// A task representing the asynchronous operation.
     /// </returns>
     Task<T> AddAsync(T entity);
-    
+
     /// <summary>
     /// Updates an existing entity in the repository.
     /// </summary>
@@ -47,7 +47,7 @@ public interface IGenericRepository<T> where T : class
     /// A task representing the asynchronous operation.
     /// </returns>
     Task UpdateAsync(T entity);
-    
+
     /// <summary>
     /// Deletes an entity from the repository.
     /// </summary>

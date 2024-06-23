@@ -12,7 +12,7 @@ public interface IStoryRepository : IGenericRepository<Story>
     /// An enumerable collection of stories created by the specified user.
     /// </returns>
     Task<IEnumerable<Story>> GetStoriesByUserIdAsync(int userId);
-    
+
     /// <summary>
     /// Retrieves stories from users that the specified user is following.
     /// </summary>

@@ -16,11 +16,11 @@ public class NotificationRepository(ApplicationDbContext context)
     /// An enumerable collection of notifications belonging to the specified user, including the associated sender.
     /// </returns>
     public async Task<IEnumerable<Notification>> GetNotificationsByUserIdAsync(int userId)
-    {
-        return await Context.Notifications
-            .Where(n => n.RecipientId == userId)
-            .Include(n => n.Sender)
-            .OrderByDescending(n => n.CreatedAt)
-            .ToListAsync();
-    }
+{
+    return await Context.Notifications
+        .Where(n => n.RecipientId == userId)
+        .Include(n => n.Sender)
+        .OrderByDescending(n => n.CreatedAt)
+        .ToListAsync();
+}
 }

@@ -11,67 +11,67 @@ public class Startup(IConfiguration configuration)
 {
     private IConfiguration Configuration { get; } = configuration;
 
-    public void ConfigureServices(IServiceCollection services)
+public void ConfigureServices(IServiceCollection services)
+{
+    // 1. Configure Services
+    services.AddControllers();
+    services.AddDbContext<ApplicationDbContext>(options =>
+        options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+    // 2. Configure AutoMapper
+    services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+
+    // 3. Register Repositories
+    services.AddRepositories();
+
+    // 4. Register Services
+    services.AddServices();
+
+    // 5. Register SignalR
+    services.AddSignalR();
+
+    // 6. Configure Swagger
+    services.AddEndpointsApiExplorer();
+    services.AddSwaggerGen();
+}
+
+public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+{
+    if (env.IsDevelopment())
     {
-        // 1. Configure Services
-        services.AddControllers();
-        services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-        
-        // 2. Configure AutoMapper
-        services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
-
-        // 3. Register Repositories
-        services.AddRepositories();
-
-        // 4. Register Services
-        services.AddServices();
-        
-        // 5. Register SignalR
-        services.AddSignalR();
-
-        // 6. Configure Swagger
-        services.AddEndpointsApiExplorer();
-        services.AddSwaggerGen();
+        app.UseSwagger();
+        app.UseSwaggerUI();
     }
 
-    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-    {
-        if (env.IsDevelopment())
+    app.UseHttpsRedirection()
+        .UseRouting()
+        .UseAuthentication()
+        .UseAuthorization()
+        .UseEndpoints(endpoints =>
         {
-            app.UseSwagger();
-            app.UseSwaggerUI();
-        }
+            endpoints.MapControllers();
+            endpoints.MapHub<DirectMessageHub>("/directmessageshub");
+            endpoints.MapHub<NotificationHub>("/notificationhub");
+        })
+        .UseExceptionHandler(appError =>
+        {
+            appError.Run(async context =>
+            {
+                context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+                context.Response.ContentType = "application/json";
 
-        app.UseHttpsRedirection()
-            .UseRouting()
-            .UseAuthentication()
-            .UseAuthorization()
-            .UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-                endpoints.MapHub<DirectMessageHub>("/directmessageshub");
-                endpoints.MapHub<NotificationHub>("/notificationhub");
-            })
-            .UseExceptionHandler(appError =>
-            {
-                appError.Run(async context =>
+                var contextFeature = context.Features.Get<IExceptionHandlerFeature>();
+                if (contextFeature != null)
                 {
-                    context.Response.StatusCode = StatusCodes.Status500InternalServerError;
-                    context.Response.ContentType = "application/json";
+                    var error = new { message = contextFeature.Error.Message };
+                    await context.Response.WriteAsync(JsonSerializer.Serialize(error));
 
-                    var contextFeature = context.Features.Get<IExceptionHandlerFeature>();
-                    if (contextFeature != null)
-                    {
-                        var error = new { message = contextFeature.Error.Message };
-                        await context.Response.WriteAsync(JsonSerializer.Serialize(error));
-
-                        // Logging
-                        Console.WriteLine($"Error: {contextFeature.Error}");
-                        Console.WriteLine($"Stack Trace: {contextFeature.Error.StackTrace}");
-                    }
-                });
+                    // Logging
+                    Console.WriteLine($"Error: {contextFeature.Error}");
+                    Console.WriteLine($"Stack Trace: {contextFeature.Error.StackTrace}");
+                }
             });
-    }
+        });
+}
 }

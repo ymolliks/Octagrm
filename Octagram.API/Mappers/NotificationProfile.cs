@@ -8,6 +8,6 @@ public class NotificationProfile : Profile
 {
     public NotificationProfile()
     {
-        CreateMap<Notification, NotificationDto>(); 
+        CreateMap<Notification, NotificationDto>();
     }
 }

@@ -8,8 +8,8 @@ public class Hashtag
     public int Id { get; set; }
 
     [Required]
-    public string Name { get; set; } 
+    public string Name { get; set; }
 
     // Navigation Property
-    public List<PostHashtag> PostHashtags { get; set; } 
+    public List<PostHashtag> PostHashtags { get; set; }
 }

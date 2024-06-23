@@ -13,5 +13,5 @@ public class PostDto
     public int LikesCount { get; set; }
     public bool IsLikedByUser { get; set; }
 
-    public List<CommentDto> Comments { get; set; } 
+    public List<CommentDto> Comments { get; set; }
 }

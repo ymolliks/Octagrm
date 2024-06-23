@@ -9,6 +9,6 @@ public class StoryProfile : Profile
     public StoryProfile()
     {
         CreateMap<Story, StoryDto>();
-        CreateMap<CreateStoryRequest, Story>(); 
+        CreateMap<CreateStoryRequest, Story>();
     }
 }

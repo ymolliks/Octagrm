@@ -8,6 +8,6 @@ public class LikeProfile : Profile
 {
     public LikeProfile()
     {
-        CreateMap<Like, LikeDto>(); 
+        CreateMap<Like, LikeDto>();
     }
 }

@@ -8,6 +8,6 @@ public class HashtagProfile : Profile
 {
     public HashtagProfile()
     {
-        CreateMap<Hashtag, HashtagDto>(); 
+        CreateMap<Hashtag, HashtagDto>();
     }
 }

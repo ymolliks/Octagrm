@@ -11,7 +11,7 @@ public interface IPostHashtagRepository : IGenericRepository<PostHashtag>
     /// <param name="hashtagIds">The collection of hashtag IDs to associate with the post.</param>
     /// <returns>A task representing the asynchronous operation.</returns>
     Task AddHashtagsToPostAsync(int postId, IEnumerable<int> hashtagIds);
-    
+
     /// <summary>
     /// Retrieves all posts associated with a specific hashtag.
     /// </summary>

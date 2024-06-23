@@ -10,7 +10,7 @@ public class UserProfile : Profile
     {
         CreateMap<User, UserDto>()
             .ForMember(dest => dest.FollowersCount, opt => opt.MapFrom(src => src.Followers.Count))
-            .ForMember(dest => dest.FollowingCount, opt => opt.MapFrom(src => src.Following.Count)); 
+            .ForMember(dest => dest.FollowingCount, opt => opt.MapFrom(src => src.Following.Count));
 
         CreateMap<UpdateUserRequest, User>();
     }

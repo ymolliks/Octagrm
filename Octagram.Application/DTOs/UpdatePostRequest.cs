@@ -2,5 +2,5 @@
 
 public class UpdatePostRequest
 {
-    public string Caption { get; set; } 
+    public string Caption { get; set; }
 }
