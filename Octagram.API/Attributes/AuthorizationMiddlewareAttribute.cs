@@ -13,15 +13,15 @@ namespace Octagram.API.Attributes;
 public class AuthorizeMiddlewareAttribute(bool allowAnonymous, params string[] roles) : Attribute, IAsyncActionFilter
 {
     public AuthorizeMiddlewareAttribute(params string[] roles) : this(false, roles)
-    {
-    }
+{
+}
 
-    public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
-    {
-        var httpContext = context.HttpContext;
-        var authService = httpContext.RequestServices.GetRequiredService<IAuthService>();
-        var userRepository = httpContext.RequestServices.GetRequiredService<IUserRepository>();
-        var middleware = new AuthorizationMiddleware(async _ => await next(), authService, userRepository, roles, allowAnonymous);
-        await middleware.InvokeAsync(httpContext);
-    }
+public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
+{
+    var httpContext = context.HttpContext;
+    var authService = httpContext.RequestServices.GetRequiredService<IAuthService>();
+    var userRepository = httpContext.RequestServices.GetRequiredService<IUserRepository>();
+    var middleware = new AuthorizationMiddleware(async _ => await next(), authService, userRepository, roles, allowAnonymous);
+    await middleware.InvokeAsync(httpContext);
+}
 }

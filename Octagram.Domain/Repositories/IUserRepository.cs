@@ -12,7 +12,7 @@ public interface IUserRepository : IGenericRepository<User>
     /// The User entity matching the provided username, or null if no user is found.
     /// </returns>
     Task<User?> GetByUsernameAsync(string username);
-    
+
     /// <summary>
     /// Retrieves a User entity based on the provided email.
     /// </summary>
@@ -21,7 +21,7 @@ public interface IUserRepository : IGenericRepository<User>
     /// The User entity matching the provided email, or null if no user is found.
     /// </returns>
     Task<User?> GetByEmailAsync(string email);
-    
+
     /// <summary>
     /// Checks if a user with the provided username exists in the database.
     /// </summary>
@@ -30,7 +30,7 @@ public interface IUserRepository : IGenericRepository<User>
     /// True if a user with the provided username exists, false otherwise.
     /// </returns>
     Task<bool> UserExistsAsync(string username);
-    
+
     /// <summary>
     /// Checks if a user with the provided ID exists in the database.
     /// </summary>

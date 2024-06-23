@@ -16,7 +16,7 @@ public class HashtagRepository(ApplicationDbContext context)
     /// The Hashtag entity with the specified name, or null if no such hashtag exists.
     /// </returns>
     public async Task<Hashtag?> GetHashtagByNameAsync(string name)
-    {
-        return await Context.Hashtags.FirstOrDefaultAsync(h => h.Name == name);
-    }
+{
+    return await Context.Hashtags.FirstOrDefaultAsync(h => h.Name == name);
+}
 }

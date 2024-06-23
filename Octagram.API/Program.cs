@@ -8,7 +8,7 @@ public static class Program
     public static async Task Main(string[] args)
     {
         var builder = CreateHostBuilder(args).Build();
-        
+
 
         // Seed data to the database for testing purposes
         using (var serviceScope = builder.Services.GetRequiredService<IServiceScopeFactory>().CreateScope())

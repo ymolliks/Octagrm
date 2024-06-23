@@ -12,7 +12,7 @@ public interface IPostRepository : IGenericRepository<Post>
     /// An enumerable collection of posts created by the specified user.
     /// </returns>
     Task<IEnumerable<Post>> GetPostsByUserIdAsync(int userId);
-    
+
     /// <summary>
     /// Gets a queryable collection of posts from users followed by the specified user.
     /// </summary>

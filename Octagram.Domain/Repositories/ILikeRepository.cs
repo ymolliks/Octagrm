@@ -13,7 +13,7 @@ public interface ILikeRepository : IGenericRepository<Like>
     /// The like entity if found, otherwise null.
     /// </returns>
     Task<Like> GetLikeByUserAndPostIdAsync(int userId, int postId);
-    
+
     /// <summary>
     /// Retrieves the total number of likes for a specific post.
     /// </summary>

@@ -26,10 +26,10 @@ public static class ServiceExtensions
         services.AddScoped<IPostHashtagRepository, PostHashtagRepository>();
         services.AddScoped<IDirectMessageRepository, DirectMessageRepository>();
         services.AddScoped<INotificationRepository, NotificationRepository>();
-        
+
         return services;
     }
-    
+
     /// <summary>
     /// Adds services to the service collection.
     /// </summary>
@@ -47,7 +47,7 @@ public static class ServiceExtensions
         services.AddScoped<IImageHelper, ImageHelper>();
         services.AddScoped<ICloudStorageHelper, CloudStorageHelper>();
         services.AddScoped<INotificationPublisher, NotificationPublisher>();
-        
+
         return services;
     }
 }

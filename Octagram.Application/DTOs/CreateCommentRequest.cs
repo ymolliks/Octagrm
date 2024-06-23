@@ -2,5 +2,5 @@
 
 public class CreateCommentRequest
 {
-    public string Content { get; set; } 
+    public string Content { get; set; }
 }

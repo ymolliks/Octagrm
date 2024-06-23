@@ -19,45 +19,45 @@ public class NotificationsController(INotificationService notificationService) :
     /// Returns an OK response with a list of NotificationDto objects representing the user's notifications.
     /// </returns>
     [HttpGet]
-    [AuthorizeMiddleware("User")]
-    public async Task<ActionResult<IEnumerable<NotificationDto>>> GetNotifications(
-        [FromQuery] int page = 1, 
-        [FromQuery] int pageSize = 10 
+[AuthorizeMiddleware("User")]
+public async Task<ActionResult<IEnumerable<NotificationDto>>> GetNotifications(
+        [FromQuery] int page = 1,
+        [FromQuery] int pageSize = 10
     )
-    {
-        var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
-        var notifications = await notificationService.GetNotificationsByUserIdAsync(userId, page, pageSize);
-        return Ok(notifications);
-    }
+{
+    var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+    var notifications = await notificationService.GetNotificationsByUserIdAsync(userId, page, pageSize);
+    return Ok(notifications);
+}
 
-    /// <summary>
-    /// Marks a notification as read.
-    /// </summary>
-    /// <param name="notificationId">The ID of the notification to mark as read.</param>
-    /// <returns>
-    /// Returns an OK response with a message "Notification marked as read."
-    /// </returns>
-    [HttpPatch("{notificationId}/read")]
-    [AuthorizeMiddleware("User")]
-    public async Task<IActionResult> MarkNotificationAsRead(int notificationId)
-    {
-        var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
-        await notificationService.MarkNotificationAsReadAsync(notificationId, userId);
-        return Ok("Notification marked as read.");
-    }
-    
-    /// <summary>
-    /// Marks all notifications for the authenticated user as read.
-    /// </summary>
-    /// <returns>
-    /// Returns an OK response with a message "Notification marked as read."
-    /// </returns>
-    [HttpPatch("read")]
-    [AuthorizeMiddleware("User")]
-    public async Task<IActionResult> MarkAllNotificationsAsRead()
-    {
-        var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
-        await notificationService.MarkAllNotificationsAsReadAsync(userId);
-        return Ok("Notification marked as read.");
-    }
+/// <summary>
+/// Marks a notification as read.
+/// </summary>
+/// <param name="notificationId">The ID of the notification to mark as read.</param>
+/// <returns>
+/// Returns an OK response with a message "Notification marked as read."
+/// </returns>
+[HttpPatch("{notificationId}/read")]
+[AuthorizeMiddleware("User")]
+public async Task<IActionResult> MarkNotificationAsRead(int notificationId)
+{
+    var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+    await notificationService.MarkNotificationAsReadAsync(notificationId, userId);
+    return Ok("Notification marked as read.");
+}
+
+/// <summary>
+/// Marks all notifications for the authenticated user as read.
+/// </summary>
+/// <returns>
+/// Returns an OK response with a message "Notification marked as read."
+/// </returns>
+[HttpPatch("read")]
+[AuthorizeMiddleware("User")]
+public async Task<IActionResult> MarkAllNotificationsAsRead()
+{
+    var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+    await notificationService.MarkAllNotificationsAsReadAsync(userId);
+    return Ok("Notification marked as read.");
+}
 }
